@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EarthMC Support - ticket-13421</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/e8acd7d9bf6207f99350ca9f9e23b168.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/3bdef1251a424500c1b3a78dea9b7e57.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/be0060dafb7a0e31d2a1ca17c0708636.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://discordapp.com/assets/8e12fb4f14d9c4592eb8ec9f22337b04.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 500;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+
+.chatlog__bot-tag {
+    margin-left: 0.3em;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    padding: 1px 2px;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    position: relative;
+    top: -.2em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/icons/571042222754103308/9383d2a934c93eeff8036808077fc5fd.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">EarthMC Support</div>
+        <div class="info__channel-name">ticket-13421</div>
+        
+
+        <div class="info__channel-message-count">48 messages</div>
+        
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-20 18:03</span>
+
+                    <div class="chatlog__message" data-message-id="734802747093811251">
+                        <div class="chatlog__content">
+                            <span class="markdown">Hello, <span class="mention" title="indian7p#6837">@indian7p</span>!
+
+If this is a support ticket, describe your issue below and include all information needed for us to take action, such as coordinates, in-game names and screenshots/chat logs.
+
+If this is a ban appeal please state your name and reason you were banned before you start your appeal.
+
+You can use <span class="pre pre--inline">-close</span> to close your ticket and <span class="pre pre--inline">-transcript</span> to get a ticket transcript. 
+
+If you speak a foreign language, please translate to English using this format: <span class="pre pre--inline">?en &lt;message&gt;</span></span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734802747706310679">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Ticket was randomly assigned to <span class="mention" title="Unknown#0000">@Unknown</span>.</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-20 18:06</span>
+
+                    <div class="chatlog__message" data-message-id="734803460876402759">
+                        <div class="chatlog__content">
+                            <span class="markdown">appeal</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734803476726677595">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/734802744606457936/734803466253500416/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/734802744606457936/734803466253500416/unknown.png" />
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734803534310014976">
+                        <div class="chatlog__content">
+                            <span class="markdown">Please provide me with reasoning and proof</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734803609375604786">
+                        <div class="chatlog__content">
+                            <span class="markdown">if many people said so, its because Raining oranges may have started saying false things so did lottie</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734804421845712966">
+                        <div class="chatlog__content">
+                            <span class="markdown">Summary of what happened
+&gt; In April I set up a minecraft server for a test thing for the Yemen Empire military
+&gt; The console told me that a specific player was from x place in the UK
+&gt; I asked in chat if this is true if she lived around there cos I happened to know some people around there
+&gt; Gujarat left the Yemen Empire this month and have been throwing hate at me and since yesterday 1pm British got the chat to bully me</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734805370433830974">
+                        <div class="chatlog__content">
+                            <span class="markdown">Note that
+A) I am pro-GDPR, I stated with all people who were expected to join the server that their IP may be seen by me
+B) I also stated that due to IPv4 at least, I can&#39;t see their location or approximate place
+C) I stated that they can not join
+
+This was in a VC by the way on the Yemen Empire Discord server so NO PROOF :/</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734805782339518476">
+                        <div class="chatlog__content">
+                            <span class="markdown">nothing I did is against the rules</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/734802744606457936/734805780091371531/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/734802744606457936/734805780091371531/unknown.png" />
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734806058304012294">
+                        <div class="chatlog__content">
+                            <span class="markdown">&gt; I NEVER shared the IP addresses, only I could see and Aternos obviously
+&gt; I NEVER said the home address as you know, you cant find that</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734807245908476005">
+                        <div class="chatlog__content">
+                            <span class="markdown"><a href=""></a>
+<b>THIS MESSAGE WAS EDITTED OUT BY INDIAN7P ON THE TRANSCRIPT AS RAINING_ORANGES CAN DELETE THIS EVIDENCE, DESCRIPTION: PROOF OF ME NOT DOXXING, IMAGE AND LINK TO EXACT MESSAGE]</b></span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734808743606222956">
+                        <div class="chatlog__content">
+                            <span class="markdown">evidence that I have not altered evidence</span>
+
+                                <span class="chatlog__edited-timestamp" title="2020-07-20 18:27">(edited)</span>
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734808905695232061">
+                        <div class="chatlog__content">
+                            <span class="markdown">unfortunately cant prove the warning and disclaimer cos u know... VC</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734810331917844562">
+                        <div class="chatlog__content">
+                            <span class="markdown">this may proove I was in VC</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/734802744606457936/734810329799852042/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/734802744606457936/734810329799852042/unknown.png" />
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734810356500791347">
+                        <div class="chatlog__content">
+                            <span class="markdown">or he always wants people</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="734811587356917870">
+                        <div class="chatlog__content">
+                            <span class="markdown">In fact I believe that Raining may have tried to got me banned, I want to turn the case on him as well
+<a href="https://discordapp.com/channels/219863747248914433/503664647342391326/734378653621682288">https://discordapp.com/channels/219863747248914433/503664647342391326/734378653621682288</a>
+Hate and toxicity from that and following that</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-20 18:51</span>
+
+                    <div class="chatlog__message" data-message-id="734814638914535496">
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh also the big question answered:
+<strong>Why should we [defined as EarthMC] unban you [in this case, defined by indian7p]</strong>
+&gt; No proper evidence I actually doxed and breached any part of rule 2.7, &quot;but not limited to&quot; can be against the defendant [me] however the only part of information I told was the approximate location of a big area which can&#39;t possibly be traced back to any individuals I had allegedly doxed, alongside that the town of the party I had allegedly doxed was incorrect, stated the party. [TL;DR - Didn&#39;t really break 2.7]
+&gt; My personal criminal record is small, I only have an active record referred to as a &quot;warn&quot; for a less serious thing, especially since I was using water buckets at the site as there was a battle [TL;DR - I&#39;ve only had one warning]
+&gt; The possible accusing party (Raining_Oranges, _loveli) have been against me since the start of July with a case of potential toxicity visible on the towny chat which happened yesterday [TL;DR - potential accusers have been against me]
+&gt; Evidence against the defendant [me]?</span>
+
+                                <span class="chatlog__edited-timestamp" title="2020-07-20 18:51">(edited)</span>
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-20 18:58</span>
+
+                    <div class="chatlog__message" data-message-id="734816511293784124">
+                        <div class="chatlog__content">
+                            <span class="markdown">also with an IP address which I withheld from anyone this is all I would say, this IP is the IP the A record for earthmc.net points to</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/734802744606457936/734816508248719410/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/734802744606457936/734816508248719410/unknown.png" />
+                            </a>
+                        </div>
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/358276345802784768/e7703c48053fa79836a765dee599be66.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="PolkadotBlueBear#9808" data-user-id="358276345802784768">PolkadotBlueBear</span>
+                <span class="chatlog__timestamp">2020-07-20 19:03</span>
+
+                    <div class="chatlog__message" data-message-id="734817680997089290">
+                        <div class="chatlog__content">
+                            <span class="markdown">-move ban</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-20 19:03</span>
+
+                    <div class="chatlog__message" data-message-id="734817685723938856">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Ticket was moved to <span class="mention">#Ban (and other) appeals</span></span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/358276345802784768/e7703c48053fa79836a765dee599be66.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="PolkadotBlueBear#9808" data-user-id="358276345802784768">PolkadotBlueBear</span>
+                <span class="chatlog__timestamp">2020-07-20 19:03</span>
+
+                    <div class="chatlog__message" data-message-id="734817740686360667">
+                        <div class="chatlog__content">
+                            <span class="markdown">-assign <span class="mention" title="KarlofDuty#5275">@KarlofDuty</span></span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-20 19:03</span>
+
+                    <div class="chatlog__message" data-message-id="734817742204436646">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Assigned <span class="mention" title="KarlofDuty#5275">@KarlofDuty</span> to ticket.</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-20 19:03</span>
+
+                    <div class="chatlog__message" data-message-id="734817853295034480">
+                        <div class="chatlog__content">
+                            <span class="markdown">oh no not Karl
+I mean hello there Karl</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-20 21:34</span>
+
+                    <div class="chatlog__message" data-message-id="734855659601920012">
+                        <div class="chatlog__content">
+                            <span class="markdown">btw my IGN is indian7p</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 11:24</span>
+
+                    <div class="chatlog__message" data-message-id="735064553624174642">
+                        <div class="chatlog__content">
+                            <span class="markdown">-status</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-21 11:24</span>
+
+                    <div class="chatlog__message" data-message-id="735064556350734366">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+                                                    <img class="chatlog__embed-author-icon" src="https://karlofduty.com/img/tardisIcon.jpg" />
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://github.com/KarlofDuty/SupportBoi">KarlofDuty/SupportBoi @ GitHub</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <span class="markdown">Bot information</span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Version:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">2.1.0-B</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Open tickets:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">379</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Closed tickets (1.1.0+ tickets only):</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">10706</span></div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 11:24</span>
+
+                    <div class="chatlog__message" data-message-id="735064596251148288">
+                        <div class="chatlog__content">
+                            <span class="markdown">oof gl with getting through that</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 12:37</span>
+
+                    <div class="chatlog__message" data-message-id="735083139499687976">
+                        <div class="chatlog__content">
+                            <span class="markdown">I think I have also been banned on the main discord server, if I am concluded not guilty do please unban me there and resend the invite link</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 14:26</span>
+
+                    <div class="chatlog__message" data-message-id="735110555928625164">
+                        <div class="chatlog__content">
+                            <span class="markdown">-summary</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-21 14:26</span>
+
+                    <div class="chatlog__message" data-message-id="735110557832708106">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <span class="markdown">Channel information</span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Ticket number:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">13421</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Ticket creator:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown"><span class="mention" title="indian7p#6837">@indian7p</span></span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Assigned staff:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown"><span class="mention" title="KarlofDuty#5275">@KarlofDuty</span></span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Creation time:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">2020-07-20 18:03</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Summary:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">No summary.</span></div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 16:34</span>
+
+                    <div class="chatlog__message" data-message-id="735142666693771394">
+                        <div class="chatlog__content">
+                            <span class="markdown">-summary</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-21 16:34</span>
+
+                    <div class="chatlog__message" data-message-id="735142668056657950">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <span class="markdown">Channel information</span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Ticket number:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">13421</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Ticket creator:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown"><span class="mention" title="indian7p#6837">@indian7p</span></span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Assigned staff:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown"><span class="mention" title="KarlofDuty#5275">@KarlofDuty</span></span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Creation time:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">2020-07-20 18:03</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Summary:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">No summary.</span></div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 16:34</span>
+
+                    <div class="chatlog__message" data-message-id="735142687069700219">
+                        <div class="chatlog__content">
+                            <span class="markdown">-status</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-21 16:34</span>
+
+                    <div class="chatlog__message" data-message-id="735142688696827956">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,255,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+                                                    <img class="chatlog__embed-author-icon" src="https://karlofduty.com/img/tardisIcon.jpg" />
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://github.com/KarlofDuty/SupportBoi">KarlofDuty/SupportBoi @ GitHub</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <span class="markdown">Bot information</span>
+                                            </div>
+
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Version:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">2.1.0-B</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Open tickets:</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">379</span></div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field  chatlog__embed-field--inline ">
+                                                            <div class="chatlog__embed-field-name"><span class="markdown">Closed tickets (1.1.0+ tickets only):</span></div>
+                                                            <div class="chatlog__embed-field-value"><span class="markdown">10712</span></div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-21 17:36</span>
+
+                    <div class="chatlog__message" data-message-id="735158156329615443">
+                        <div class="chatlog__content">
+                            <span class="markdown">-transcript 13421</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/579092488044806167/21f03ad95e3e4d3d014d18d3b69d8f18.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="SupportBoi#9420" data-user-id="579092488044806167">SupportBoi</span>
+                    <span class="chatlog__bot-tag">BOT</span>
+                <span class="chatlog__timestamp">2020-07-21 17:36</span>
+
+                    <div class="chatlog__message" data-message-id="735158167993843783">
+                        <div class="chatlog__content">
+                            <span class="markdown"></span>
+
+                        </div>
+
+
+                        <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill" style="background-color: rgba(0,255,0,1)"></div>
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                        <div class="chatlog__embed-description"><span class="markdown">Transcript sent, <span class="mention" title="indian7p#6837">@indian7p</span>!</span></div>
+
+                                    </div>
+
+                                </div>    
+
+
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-24 00:23</span>
+
+                    <div class="chatlog__message" data-message-id="735985488334159882">
+                        <div class="chatlog__content">
+                            <span class="markdown">btw for the Geo IP track incident- That was legal as I was simply following the Data Protection Act 2018 law where it states that the person (in this case _loveli) has the right to <span class="pre pre--inline">access personal data</span>, that was essentially what that player did in <a href="https://discordapp.com/channels/571042222754103308/734802744606457936/734807151910060133">https://discordapp.com/channels/571042222754103308/734802744606457936/734807151910060133</a> and as well I got that answer wrong.</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="735985860918378567">
+                        <div class="chatlog__content">
+                            <span class="markdown">The town bit isn&#39;t that sensitive, the IP was which I actually obtained in a completely lawful way. Also the definition of doxxing states that a party searches for <strong>and</strong> publishes. Never searched, obtained through lawful means and I never published any data</span>
+
+                        </div>
+
+                        <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/734802744606457936/735985854895489115/unknown.png">
+                                
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/734802744606457936/735985854895489115/unknown.png" />
+                            </a>
+                        </div>
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-24 01:52</span>
+
+                    <div class="chatlog__message" data-message-id="736007772109537402">
+                        <div class="chatlog__content">
+                            <span class="markdown">Also as this player said that the town was incorrect, it is likely that the IP was wrong anyways maybe altered on Aternos’ side and no potential doxxing</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="736008182094102601">
+                        <div class="chatlog__content">
+                            <span class="markdown">The town stated by me was many mikes out relative to the town that this player stated</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="736009129797353554">
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="KarlofDuty#5275">@KarlofDuty</span> soz for ping</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/170904988724232192/a_8c23532dee1712dfd7b0ab23683913ec.gif" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="KarlofDuty#5275" data-user-id="170904988724232192">KarlofDuty</span>
+                <span class="chatlog__timestamp">2020-07-24 13:54</span>
+
+                    <div class="chatlog__message" data-message-id="736189682559221770">
+                        <div class="chatlog__content">
+                            <span class="markdown">I am away currently, someone else can deal with this for now</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="736190006967926815">
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention">#ticket-13371</span></span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-24 20:23</span>
+
+                    <div class="chatlog__message" data-message-id="736287475982532729">
+                        <div class="chatlog__content">
+                            <span class="markdown">f</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-25 11:12</span>
+
+                    <div class="chatlog__message" data-message-id="736511155245285416">
+                        <div class="chatlog__content">
+                            <span class="markdown"><span class="mention" title="CorruptedGreed^verifiedxd#5413">@CorruptedGreed^verifiedxd</span> congrats! its now ur problem to assign someone else</span>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="chatlog__message" data-message-id="736511172517298227">
+                        <div class="chatlog__content">
+                            <span class="markdown">i think</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/492278241135165452/43bf4c7471070ecaa93d0e61ad58bf16.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="indian7p#6837" data-user-id="492278241135165452">indian7p</span>
+                <span class="chatlog__timestamp">2020-07-25 20:21</span>
+
+                    <div class="chatlog__message" data-message-id="736649248434683965">
+                        <div class="chatlog__content">
+                            <span class="markdown">-transcript</span>
+
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
